@@ -1,38 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mi Anatomía 3D</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mi Anatomía 3D - Educativo</title>
+  <link rel="stylesheet" href="styles.css">
+  <!-- three.js desde CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-  <style>
-    body { margin: 0; overflow: hidden; background: #111; }
-    canvas { display: block; }
-  </style>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 </head>
 <body>
-  <script>
-    // Escena básica de prueba
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
-    const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+  <header><h1>Mi Anatomía 3D (Educativo)</h1></header>
+  <main>
+    <div id="canvas-wrap"></div>
+    <aside id="sidebar">
+      <h2>Controles</h2>
+      <div>
+        <label><input type="checkbox" id="toggle-skeleton" checked> Esqueleto</label>
+      </div>
+      <div>
+        <label><input type="checkbox" id="toggle-muscles" checked> Músculos</label>
+      </div>
+      <div>
+        <label><input type="checkbox" id="toggle-organs" checked> Órganos</label>
+      </div>
+      <div>
+        <label><input type="checkbox" id="toggle-head" checked> Cabeza / Cerebro</label>
+      </div>
 
-    const geometry = new THREE.BoxGeometry();
-    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+      <div style="margin-top:10px;">
+        <label>Opacidad: <span id="op-val">1</span></label>
+        <input id="opacity" type="range" min="0" max="1" step="0.01" value="1">
+      </div>
 
-    camera.position.z = 3;
+      <h3>Seleccionado</h3>
+      <div id="selected-info">Ninguna parte seleccionada. Haz click sobre una parte.</div>
 
-    function animate() {
-      requestAnimationFrame(animate);
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
-      renderer.render(scene, camera);
-    }
-    animate();
-  </script>
+      <hr>
+      <p style="font-size:12px;color:#666">Proyecto educativo. Puedes usarlo en GitHub Pages.</p>
+    </aside>
+  </main>
+
+  <footer>Creado por Lizeth — Mi Anatomía 3D</footer>
+
+  <script src="app.js"></script>
 </body>
 </html>
